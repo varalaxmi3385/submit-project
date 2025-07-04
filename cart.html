@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- navbar starts here -->
+    <header>
+        <nav>
+            <div class="logo"><h3>Tech-Shop</h3></div>
+            <div class="navbar">
+                <div class="search-icon">
+                     <i class="fa-solid fa-magnifying-glass"></i>
+                     <p class="tool-tip">Search</p>
+                </div>
+                <div class="cart-icon">
+                     <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a>
+                     <p class="tool-tip">Cart</p>
+                </div>
+                <div class="profile-icon">
+                     <a href=""><i class="fa-regular fa-user profile"></i></a>
+                     <div class="profilecard">
+                        <h2>Hello!</h2>
+                        <p>Access account and manage orders</p>
+                        <button class="loginbutton"><a href="#login">Login/Signup</a></button>
+                        <hr>
+                        <p>Please Login</p>
+                     </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- navbar ends here -->
+
+    <!-- login page starts here -->
+     <div class="login" id="login">
+        <a href="">x</a>
+        <h4>Login</h4>
+        <p>New to Tech-Shop?<a href="#signup">Create an account</a></p>
+        <input type="Email" placeholder="Email"><br><br>
+        <input type="text" placeholder="Password"><br><br>
+        <button>Login</button><br>
+        <div class="separate">
+            <span>or login with<br></span>
+        </div>
+
+        <div class="mediaboxes">
+            <p class="fb">Facebook</p> 
+            <p class="goo">Google</p> 
+            <p class="twit">twitter</p> 
+        </div>
+    </div>  
+    <!-- login page ends here -->
+     
+    <!-- signin page starts here -->
+         <div class="signin" id="signup">
+          <a href="">x</a>
+            <h3>Signup</h3>
+            <p>Already have an account?<a href="#login">Login Here</a></p>
+            <input type="text" placeholder="Username">
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Confirm Password">
+            <button>Signup</button>
+            <div class="separate">
+                <span>or login with<br></span>
+            </div>
+            <div class="mediaboxes">
+                <p class="fb">Facebook</p> 
+                <p class="goo">Google</p> 
+                <p class="twit">twitter</p> 
+            </div>
+          </div> 
+    <!-- sign in page ends here -->
+
+<!-- main starts here -->
+    <main>
+        <div class="scroll-cart">
+            <div class="cart-item">
+                <img src="/jbl660nc-1.png" alt="JBL 660NC">
+                <div>
+                    <p>JBL Live 660NC Wireless Over-Ear NC Headphones</p>
+                    <p>₹9,999 <span><strike>₹14,999</strike></span></p>
+                    <div>
+                        <p>-</p>
+                        <p>1</p>
+                        <p>+</p>
+                    </div>
+                </div>
+                <span><i class="fa-solid fa-trash"></i></span>
+            </div>
+            <hr>
+            <div class="cart-item">
+                <img src="/boat518-1.png" alt="boAt Rockerz 518">
+                <div>
+                    <p>boAt Rockerz 518 On-Ear Wireless Headphones</p>
+                    <p>₹1,299 <span><strike>₹3,990</strike></span></p>
+                    <div>
+                        <p>-</p>
+                        <p>1</p>
+                        <p>+</p>
+                    </div>
+                </div>
+                <span><i class="fa-solid fa-trash"></i></span>
+            </div>
+            <hr>
+            <div class="cart-item">
+                <img src="/boat131-1.png" alt="boAt Airdopes 131">
+                <div>
+                    <p>boAt Airdopes 131 Wireless In-Ear Earbuds</p>
+                    <p>₹1,099 <span><strike>₹2,990</strike></span></p>
+                    <div>
+                        <p>-</p>
+                        <p>1</p>
+                        <p>+</p>
+                    </div>
+                </div>
+                <span><i class="fa-solid fa-trash"></i></span>
+            </div>
+            <hr>
+            <div class="cart-item">
+                <img src="/boat110-1.png" alt="boAt 110">
+                <div>
+                    <p>boAt Bassheads 110 In-Ear Wired Earphones</p>
+                    <p>₹499 <span><strike>₹999</strike></span></p>
+                    <div>
+                        <p>-</p>
+                        <p>1</p>
+                        <p>+</p>
+                    </div>
+                </div>
+                <span><i class="fa-solid fa-trash"></i></span>
+            </div>
+        </div>
+
+        <div class="summary">
+            <h4>Order Summary (4 Items)</h4>
+            <p class="original">Original Price <span>₹22,978</span></p>
+            <p class="discount">Discount <span>-₹10,082</span></p>
+            <p class="delivery">Delivery <span>Free</span></p>
+            <hr>
+            <h5>Total Price <span>₹12,896</span></h5>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </main>
+
+    <!-- main ends here -->
+
+
+    <!-- Footer Starts Here -->
+
+  <div class="footer">
+    <div class="footerstart">
+      <div class="content">
+        <h3>Tech-Shop</h3>
+        <p>Subscribe to  our Email alerts to receive early discount offers, and new products info.</p>
+        <input type="email" placeholder="email Address*">
+        <button>Subscribe</button>
+      </div>
+      <div class="content">
+        <ul type="none">
+          <h3>Help</h3>
+          <li>FAQs</li>
+          <li>Track Order</li>
+          <li>Cancel Order</li>
+          <li>Return Order</li>
+          <li>Warranty info</li>
+        </ul>
+      </div>
+      <div class="content">
+        <ul type="none">
+          <h3>Policies</h3>
+          <li>Return Policy</li>
+          <li>Security</li>
+          <li>Sitemap</li>
+          <li>Privacy Policy</li>
+          <li>Terms & Conditions</li>
+        </ul>
+      </div>
+      <div class="content">
+         <ul type="none">
+          <h3>Company</h3>
+          <li>About Us</li>
+          <li>Contact Us</li>
+          <li>Service Centers</li>
+          <li>Careers</li>
+          <li>Affiliates</li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="footerend">
+      
+      <div class="copyrights"> <p>2024 | All Rights Reserved. Built by|BOINI VARALAXMI</p></div>
+        <div class="footerfonts">
+          <div class="facebook-icon">
+            <i class="fa-brands fa-facebook-f"></i>
+          </div>
+          <div class="twitter-icon">
+            <i class="fa-brands fa-twitter"></i>
+          </div>
+          <div class="insta-icon">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <div class="linked-icon">            
+            <i class="fa-brands fa-linkedin-in"></i>
+          </div>
+        </div>
+    </div>
+  </div>
+    
+
+  <!-- footer ends here -->
+    
+</body>
+</html>

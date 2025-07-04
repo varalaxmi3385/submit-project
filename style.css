@@ -1,0 +1,3221 @@
+/* --- GLOBAL STYLES & RESETS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0c0c0c;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* --- HEADER STYLES --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #111;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.logo { font-size: 22px; font-weight: bold; color: #d1d5db; }
+.icon-nav { display: flex; gap: 30px; }
+.icon-container { position: relative; cursor: pointer; font-size: 18px; color: #d1d5db; }
+.tooltip { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); background-color: #2c2c2c; padding: 5px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; display: none; }
+.icon-container:hover .tooltip { display: block; }
+.user-dropdown { position: relative; }
+.user-menu { display: none; position: absolute; top: 30px; right: -10px; background-color: #2c2c2c; border-radius: 8px; padding: 15px; width: 240px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); z-index: 1001; }
+.user-greeting { font-size: 14px; font-weight: bold; color: #ffffff; margin: 0 0 4px 0; }
+.user-instruction { font-size: 12px; color: #ccc; line-height: 1.4; margin: 0 0 12px 0; }
+.user-login-prompt { font-size: 12px; color: #ccc; margin: 0; }
+.user-menu button { background-color: transparent; border: 1px solid #ccc; color: #fff; padding: 6px 12px; font-size: 13px; border-radius: 4px; cursor: pointer; width: 100%; margin-bottom: 8px; }
+.user-dropdown:hover .user-menu { display: block; }
+
+/* --- HERO SLIDER (MANUAL) STYLES --- */
+/* --- HERO SLIDER (AUTOPLAY FORWARD DIRECTION) STYLES --- */
+.css-slider-container {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+    background: #000;
+}
+.slides { 
+    display: flex; 
+    width: 400%; /* Changed for 4 slides (3 original + 1 clone) */
+    height: 100%; 
+    /* This animation makes it slide automatically */
+    animation: infinite-forward 12s infinite;
+}
+.slide { 
+    width: 25%; /* Each slide is 1/4 of the container */
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: transform 0.5s ease-in-out;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.slide-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem; width: 90%; max-width: 1200px; text-align: left; }
+.slide-text p { font-size: 1rem; color: #a0a0a0; }
+.slide-text h1 { font-size: 3rem; line-height: 1.2; margin: 10px 0 20px; color: #fff; }
+.slide-text .price { margin-bottom: 30px; }
+.slide-text .current-price { font-size: 1.5rem; font-weight: 600; color: #fff; margin-right: 15px; }
+.slide-text .old-price { font-size: 1.5rem; color: #777; text-decoration: line-through; }
+.slide-image { display: flex; justify-content: center; align-items: center; }
+.slide-image img { max-width: 80%; max-height: 400px; object-fit: contain; }
+
+/* --- GENERAL BUTTON STYLES --- */
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #e50914; /* This is the red color */
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #e50914;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Keyframes for the infinite forward sliding */
+@keyframes infinite-forward {
+    0%, 22% { transform: translateX(0%); }
+    25%, 47% { transform: translateX(-25%); }
+    50%, 72% { transform: translateX(-50%); }
+    75%, 97% { transform: translateX(-75%); }
+    100% { transform: translateX(-75%); }
+}
+
+.slider-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #555; }
+
+/* Animate each dot individually over the same total duration */
+.slider-nav .nav-dot:nth-child(1) { animation: active-dot-1 12s infinite; }
+.slider-nav .nav-dot:nth-child(2) { animation: active-dot-2 12s infinite; }
+.slider-nav .nav-dot:nth-child(3) { animation: active-dot-3 12s infinite; }
+
+/* Keyframes to control the first dot's color */
+@keyframes active-dot-1 { 
+    0%, 25% { background-color: #e50914; } 
+    28%, 100% { background-color: #555; } 
+}
+/* Keyframes to control the second dot's color */
+@keyframes active-dot-2 { 
+    0%, 25% { background-color: #555; } 
+    28%, 50% { background-color: #e50914; } 
+    53%, 100% { background-color: #555; } 
+}
+/* Keyframes to control the third dot's color */
+@keyframes active-dot-3 { 
+    0%, 50% { background-color: #555; } 
+    53%, 75% { background-color: #e50914; } 
+    78%, 100% { background-color: #555; } 
+}
+/* --- FEATURED PRODUCTS (CONTINUOUS SCROLL) STYLES --- */
+/* --- FEATURED PRODUCTS (CONTINUOUS SCROLL) STYLES --- */
+.featured-products-section {
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.products-carousel-wrapper {
+    width: 100%;
+    display: flex;
+}
+
+.products-carousel.continuous {
+    display: flex;
+    animation: continuous-scroll 25s linear infinite;
+}
+
+.products-carousel.continuous:hover {
+    animation-play-state: paused;
+}
+
+@keyframes continuous-scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.product-card {
+    flex: 0 0 260px;
+    margin: 0 10px;
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    z-index: 1;
+    /* New styles for vertical layout */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.product-card h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 15px; /* Space below the title */
+    order: 1; /* Order: 1. Name */
+}
+
+.product-image-container {
+    background-color: #000;
+    order: 2; /* Order: 2. Image */
+    margin-bottom: 15px; /* Space below the image */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+}
+
+.product-card .price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    order: 3; /* Order: 3. Price */
+}
+
+.product-card .old-price {
+    font-size: 0.9rem;
+    color: #777;
+    text-decoration: line-through;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+/* --- TOP PRODUCTS GRID & FILTER STYLES --- */
+/* --- TOP PRODUCTS GRID STYLES --- */
+/* --- TOP PRODUCTS GRID STYLES --- */
+.products-section-grid { 
+    padding: 60px 0; 
+}
+
+.product-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 25px; 
+}
+
+/* This is the new rule with left-aligned text */
+.product-card-grid {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left; /* <--- Changed from center to left */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card-grid:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.product-card-grid img {
+    margin: 0 auto 15px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.rating {
+    color: #e50914; /* Red color for stars */
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.product-card-grid h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+    flex-grow: 1; /* Allows title to take up space, pushing price down */
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 15px;
+    min-height: 30px; /* Ensures consistent height */
+}
+
+.price-grid {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.price-grid del {
+    font-weight: 400;
+    color: #a0a0a0;
+    margin-left: 10px;
+}
+
+.browse-all {
+    background-color: #1a1a1a;
+    border: 1px dashed #555; /* Dashed border for standout style */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px; /* Ensure it matches card height */
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.browse-all:hover {
+    border-color: #e50914;
+}
+
+.browse-all a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease;
+}
+
+.browse-all a:hover {
+    color: #e50914;
+}
+/* --- ADVANTAGES SECTION STYLES --- */
+/* --- OUR ADVANTAGES SECTION STYLES --- */
+/* --- OUR ADVANTAGES SECTION STYLES --- */
+.our-advantages-section {
+    padding: 80px 0;
+    background-color: #141414; /* Matching the dark background */
+}
+
+.advantages-grid-new {
+    display: grid;
+    /* Create 4 evenly spaced columns on larger screens */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.advantage-item-new {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content within the column */
+    gap: 15px; /* Space between icon and text */
+}
+
+.advantage-item-new i {
+    font-size: 2rem; /* Icon size */
+    color: #e50914; /* Red accent color */
+    flex-shrink: 0; /* Prevents the icon from shrinking */
+}
+
+.advantage-text h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e0e0e0; /* A slightly off-white for the title */
+    margin: 0;
+    padding: 0;
+}
+
+.advantage-text p {
+    font-size: 0.85rem;
+    color: #888; /* A muted gray for the subtitle */
+    margin: 0;
+    padding: 0;
+}
+
+/* --- UPDATE RESPONSIVE MEDIA QUERIES --- */
+/* Add or update these rules inside your existing media queries at the bottom of the file */
+
+/* For tablets */
+@media (max-width: 992px) {
+    .advantages-grid-new {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+        gap: 30px; /* Increase gap for better spacing */
+    }
+    .advantage-item-new {
+        justify-content: flex-start; /* Align items to the left on 2 columns */
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 768px) {
+    .advantages-grid-new {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+}
+/* --- FOOTER STYLES --- */
+
+/* --- FOOTER STYLES --- */
+.main-footer {
+    padding: 60px 0 0 0; /* Remove bottom padding to let footer-bottom handle it */
+    background-color: #000;
+    border-top: 1px solid #333;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr; /* Make first column wider */
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column .logo-footer {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+
+
+.footer-column p {
+    color: #a0a0a0;
+    margin-bottom: 20px;
+    max-width: 300px;
+}
+
+.subscribe-form input {
+    width: 100%;
+    padding: 12px;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.subscribe-form button {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #e50914; /* This is the red color */
+    color: #fff;
+    border: none; /* Removes any default border */
+    cursor: pointer; /* Shows a clickable cursor on hover */
+}
+
+.footer-column h4 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #a0a0a0;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    border-top: 1px solid #333333;
+    color: #a0a0a0;
+}
+
+.social-icons a {
+    margin-left: 20px;
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #e50914;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: #e50914;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background-color: #c00a12;
+}
+
+/* --- UPDATE RESPONSIVE MEDIA QUERIES --- */
+/* Add or update these rules inside your existing media queries at the bottom of the file */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-column p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* --- MODAL STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* The dark overlay */
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* --- Visibility Control --- */
+    opacity: 0; /* Hidden by default */
+    pointer-events: none; /* Can't be clicked when hidden */
+    transition: opacity 0.3s ease;
+}
+
+/* The magic: When the URL hash matches the ID, the modal becomes visible */
+.modal-overlay:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #888;
+    font-size: 2rem;
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.modal-subtitle {
+    color: #a0a0a0;
+    margin-bottom: 30px;
+}
+.modal-subtitle a {
+    color: #a0a0a0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.modal-form .form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+/* ADD THESE NEW RULES FOR THE FORM */
+.modal-form .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-form input {
+    width: 100%;
+    padding: 14px 12px;
+    background-color: #333;
+    border: 1px solid #555;
+    
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.modal-form input:focus {
+    border-color: #e50914;
+}
+
+/* Style the placeholder text */
+.modal-form input::placeholder {
+    color: #888;
+}
+
+.modal-form button {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 1.1rem;
+}
+/* --- NEW STYLES FOR SOCIAL LOGIN IN MODAL --- */
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin: 25px 0;
+}
+
+.separator hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #444;
+}
+
+.separator span {
+    padding: 0 15px;
+    font-size: 0.9rem;
+}
+
+.social-login {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.social-btn {
+    flex-grow: 1;
+    padding: 12px;
+ 
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.social-btn:hover {
+    opacity: 0.9;
+}
+
+/* Specific colors for each button */
+.social-btn.facebook {
+    background-color: #3b5998;
+}
+
+.social-btn.google {
+    background-color: #db4437;
+}
+
+.social-btn.twitter {
+    background-color: #1da1f2;
+}
+
+
+/* --- PRODUCT DETAIL PAGE (IMAGE MATCH) STYLES --- */
+/* --- PRODUCT TABS SECTION STYLES --- */
+/* --- GLOBAL STYLES & RESETS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0c0c0c;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* --- HEADER STYLES --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #111;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.logo { font-size: 22px; font-weight: bold; color: #d1d5db; }
+.icon-nav { display: flex; gap: 30px; }
+.icon-container { position: relative; cursor: pointer; font-size: 18px; color: #d1d5db; }
+.tooltip { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); background-color: #2c2c2c; padding: 5px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; display: none; }
+.icon-container:hover .tooltip { display: block; }
+.user-dropdown { position: relative; }
+.user-menu { display: none; position: absolute; top: 30px; right: -10px; background-color: #2c2c2c; border-radius: 8px; padding: 15px; width: 240px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); z-index: 1001; }
+.user-greeting { font-size: 14px; font-weight: bold; color: #ffffff; margin: 0 0 4px 0; }
+.user-instruction { font-size: 12px; color: #ccc; line-height: 1.4; margin: 0 0 12px 0; }
+.user-login-prompt { font-size: 12px; color: #ccc; margin: 0; }
+.user-menu button { background-color: transparent; border: 1px solid #ccc; color: #fff; padding: 6px 12px; font-size: 13px; border-radius: 4px; cursor: pointer; width: 100%; margin-bottom: 8px; }
+.user-dropdown:hover .user-menu { display: block; }
+
+/* --- HERO SLIDER (AUTOPLAY FORWARD DIRECTION) STYLES --- */
+.css-slider-container {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+    background: #000;
+}
+.slides { 
+    display: flex; 
+    width: 400%; /* Changed for 4 slides (3 original + 1 clone) */
+    height: 100%; 
+    animation: infinite-forward 12s infinite;
+}
+.slide { 
+    width: 25%; /* Each slide is 1/4 of the container */
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: transform 0.5s ease-in-out;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.slide-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem; width: 90%; max-width: 1200px; text-align: left; }
+.slide-text p { font-size: 1rem; color: #a0a0a0; }
+.slide-text h1 { font-size: 3rem; line-height: 1.2; margin: 10px 0 20px; color: #fff; }
+.slide-text .price { margin-bottom: 30px; }
+.slide-text .current-price { font-size: 1.5rem; font-weight: 600; color: #fff; margin-right: 15px; }
+.slide-text .old-price { font-size: 1.5rem; color: #777; text-decoration: line-through; }
+.slide-image { display: flex; justify-content: center; align-items: center; }
+.slide-image img { max-width: 80%; max-height: 400px; object-fit: contain; }
+
+/* --- GENERAL BUTTON STYLES (Used by Header/Modal) --- */
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #e50914; /* This is the red color */
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #e50914;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Keyframes for the infinite forward sliding */
+@keyframes infinite-forward {
+    0%, 22% { transform: translateX(0%); }
+    25%, 47% { transform: translateX(-25%); }
+    50%, 72% { transform: translateX(-50%); }
+    75%, 97% { transform: translateX(-75%); }
+    100% { transform: translateX(-75%); }
+}
+
+.slider-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #555; }
+
+/* Animate each dot individually over the same total duration */
+.slider-nav .nav-dot:nth-child(1) { animation: active-dot-1 12s infinite; }
+.slider-nav .nav-dot:nth-child(2) { animation: active-dot-2 12s infinite; }
+.slider-nav .nav-dot:nth-child(3) { animation: active-dot-3 12s infinite; }
+
+/* Keyframes to control the first dot's color */
+@keyframes active-dot-1 { 
+    0%, 25% { background-color: #e50914; } 
+    28%, 100% { background-color: #555; } 
+}
+/* Keyframes to control the second dot's color */
+@keyframes active-dot-2 { 
+    0%, 25% { background-color: #555; } 
+    28%, 50% { background-color: #e50914; } 
+    53%, 100% { background-color: #555; } 
+}
+/* Keyframes to control the third dot's color */
+@keyframes active-dot-3 { 
+    0%, 50% { background-color: #555; } 
+    53%, 75% { background-color: #e50914; } 
+    78%, 100% { background-color: #555; } 
+}
+
+/* --- TOP PRODUCTS GRID STYLES (from index.html) --- */
+.products-section-grid { 
+    padding: 60px 0; 
+}
+
+.product-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 25px; 
+}
+
+/* The link wrapping for your main page product cards */
+.product-card-grid-link {
+    text-decoration: none; /* Remove underline from the link */
+    color: inherit; /* Inherit text color from parent */
+    display: block; /* Make the anchor tag a block element to contain the card */
+    height: 100%; /* Ensure link takes full height of grid cell */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition from original card */
+}
+
+.product-card-grid-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.product-card-grid {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Make sure inner card takes full height of its parent link */
+}
+
+.product-card-grid img {
+    margin: 0 auto 15px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.rating {
+    color: #e50914; /* Red color for stars */
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.product-card-grid h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+    flex-grow: 1; /* Allows title to take up space, pushing price down */
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 15px;
+    min-height: 30px; /* Ensures consistent height */
+}
+
+.price-grid {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.price-grid del {
+    font-weight: 400;
+    color: #a0a0a0;
+    margin-left: 10px;
+}
+
+.browse-all {
+    background-color: #1a1a1a;
+    border: 1px dashed #555; /* Dashed border for standout style */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px; /* Ensure it matches card height */
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.browse-all:hover {
+    border-color: #e50914;
+}
+
+.browse-all a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease;
+}
+
+.browse-all a:hover {
+    color: #e50914;
+}
+
+/* --- OUR ADVANTAGES SECTION STYLES --- */
+.our-advantages-section {
+    padding: 80px 0;
+    background-color: #141414; /* Matching the dark background */
+}
+
+.advantages-grid-new {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.advantage-item-new {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content within the column */
+    gap: 15px; /* Space between icon and text */
+}
+
+.advantage-item-new i {
+    font-size: 2rem; /* Icon size */
+    color: #e50914; /* Red accent color */
+    flex-shrink: 0; /* Prevents the icon from shrinking */
+}
+
+.advantage-text h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e0e0e0; /* A slightly off-white for the title */
+    margin: 0;
+    padding: 0;
+}
+
+.advantage-text p {
+    font-size: 0.85rem;
+    color: #888; /* A muted gray for the subtitle */
+    margin: 0;
+    padding: 0;
+}
+
+/* --- FOOTER STYLES (REMOVED - THIS SECTION IS EMPTY NOW) --- */
+/* (Previous footer CSS rules were here) */
+
+
+/* --- MODAL STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #888;
+    font-size: 2rem;
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.modal-subtitle {
+    color: #a0a0a0;
+    margin-bottom: 30px;
+}
+.modal-subtitle a {
+    color: #a0a0a0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.modal-form .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-form input {
+    width: 100%;
+    padding: 14px 12px;
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.modal-form input:focus {
+    border-color: #e50914;
+}
+
+.modal-form input::placeholder {
+    color: #888;
+}
+
+.modal-form button {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 1.1rem;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin: 25px 0;
+}
+
+.separator hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #444;
+}
+
+.separator span {
+    padding: 0 15px;
+    font-size: 0.9rem;
+}
+
+.social-login {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.social-btn {
+    flex-grow: 1;
+    padding: 12px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.social-btn:hover {
+    opacity: 0.9;
+}
+
+.social-btn.facebook {
+    background-color: #3b5998;
+}
+
+.social-btn.google {
+    background-color: #db4437;
+}
+
+.social-btn.twitter {
+    background-color: #1da1f2;
+}
+
+/* --- PRODUCT DETAIL MAIN SECTION STYLES --- */
+/* --- GLOBAL STYLES & RESETS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0c0c0c;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* --- HEADER STYLES --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #111;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.logo { font-size: 22px; font-weight: bold; color: #d1d5db; }
+.icon-nav { display: flex; gap: 30px; }
+.icon-container { position: relative; cursor: pointer; font-size: 18px; color: #d1d5db; }
+.tooltip { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); background-color: #2c2c2c; padding: 5px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; display: none; }
+.icon-container:hover .tooltip { display: block; }
+.user-dropdown { position: relative; }
+.user-menu { display: none; position: absolute; top: 30px; right: -10px; background-color: #2c2c2c; border-radius: 8px; padding: 15px; width: 240px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); z-index: 1001; }
+.user-greeting { font-size: 14px; font-weight: bold; color: #ffffff; margin: 0 0 4px 0; }
+.user-instruction { font-size: 12px; color: #ccc; line-height: 1.4; margin: 0 0 12px 0; }
+.user-login-prompt { font-size: 12px; color: #ccc; margin: 0; }
+.user-menu button { background-color: transparent; border: 1px solid #ccc; color: #fff; padding: 6px 12px; font-size: 13px; border-radius: 4px; cursor: pointer; width: 100%; margin-bottom: 8px; }
+.user-dropdown:hover .user-menu { display: block; }
+
+/* --- HERO SLIDER (AUTOPLAY FORWARD DIRECTION) STYLES --- */
+.css-slider-container {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+    background: #000;
+}
+.slides {
+    display: flex;
+    width: 400%; /* Changed for 4 slides (3 original + 1 clone) */
+    height: 100%;
+    animation: infinite-forward 12s infinite;
+}
+.slide {
+    width: 25%; /* Each slide is 1/4 of the container */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease-in-out;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.slide-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem; width: 90%; max-width: 1200px; text-align: left; }
+.slide-text p { font-size: 1rem; color: #a0a0a0; }
+.slide-text h1 { font-size: 3rem; line-height: 1.2; margin: 10px 0 20px; color: #fff; }
+.slide-text .price { margin-bottom: 30px; }
+.slide-text .current-price { font-size: 1.5rem; font-weight: 600; color: #fff; margin-right: 15px; }
+.slide-text .old-price { font-size: 1.5rem; color: #777; text-decoration: line-through; }
+.slide-image { display: flex; justify-content: center; align-items: center; }
+.slide-image img { max-width: 80%; max-height: 400px; object-fit: contain; }
+
+/* --- GENERAL BUTTON STYLES (Used by Header/Modal) --- */
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #e50914; /* This is the red color */
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #e50914;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Keyframes for the infinite forward sliding */
+@keyframes infinite-forward {
+    0%, 22% { transform: translateX(0%); }
+    25%, 47% { transform: translateX(-25%); }
+    50%, 72% { transform: translateX(-50%); }
+    75%, 97% { transform: translateX(-75%); }
+    100% { transform: translateX(-75%); }
+}
+
+.slider-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #555; }
+
+/* Animate each dot individually over the same total duration */
+@keyframes active-dot-1 {
+    0%, 25% { background-color: #e50914; }
+    28%, 100% { background-color: #555; }
+}
+@keyframes active-dot-2 {
+    0%, 25% { background-color: #555; }
+    28%, 50% { background-color: #e50914; }
+    53%, 100% { background-color: #555; }
+}
+@keyframes active-dot-3 {
+    0%, 50% { background-color: #555; }
+    53%, 75% { background-color: #e50914; }
+    78%, 100% { background-color: #555; }
+}
+
+/* --- TOP PRODUCTS GRID STYLES (from index.html) --- */
+.products-section-grid {
+    padding: 60px 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.product-card-grid-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-grid-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.product-card-grid {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-card-grid img {
+    margin: 0 auto 15px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.rating {
+    color: #e50914;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.product-card-grid h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 15px;
+    min-height: 30px;
+}
+
+.price-grid {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.price-grid del {
+    font-weight: 400;
+    color: #a0a0a0;
+    margin-left: 10px;
+}
+
+.browse-all {
+    background-color: #1a1a1a;
+    border: 1px dashed #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.browse-all:hover {
+    border-color: #e50914;
+}
+
+.browse-all a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease;
+}
+
+.browse-all a:hover {
+    color: #e50914;
+}
+
+/* --- OUR ADVANTAGES SECTION STYLES --- */
+.our-advantages-section {
+    padding: 80px 0;
+    background-color: #141414;
+}
+
+.advantages-grid-new {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.advantage-item-new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.advantage-item-new i {
+    font-size: 2rem;
+    color: #e50914;
+    flex-shrink: 0;
+}
+
+.advantage-text h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+.advantage-text p {
+    font-size: 0.85rem;
+    color: #888;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- FOOTER STYLES (REMOVED - THIS SECTION IS EMPTY NOW) --- */
+ .main-footer {
+    padding: 60px 0 0 0;
+    background-color: #000;
+    border-top: 1px solid #333;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column .logo-footer {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.footer-column p {
+    color: #a0a0a0;
+    margin-bottom: 20px;
+    max-width: 300px;
+}
+
+.subscribe-form input {
+    width: 100%;
+    padding: 12px;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.subscribe-form button {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.footer-column h4 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #a0a0a0;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    border-top: 1px solid #333333;
+    color: #a0a0a0;
+}
+
+.social-icons a {
+    margin-left: 20px;
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #e50914;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: #e50914;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background-color: #c00a12;
+} */
+
+
+/* --- MODAL STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #888;
+    font-size: 2rem;
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.modal-subtitle {
+    color: #a0a0a0;
+    margin-bottom: 30px;
+}
+.modal-subtitle a {
+    color: #a0a0a0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.modal-form .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-form input {
+    width: 100%;
+    padding: 14px 12px;
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.modal-form input:focus {
+    border-color: #e50914;
+}
+
+.modal-form input::placeholder {
+    color: #888;
+}
+
+.modal-form button {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 1.1rem;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin: 25px 0;
+}
+
+.separator hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #444;
+}
+
+.separator span {
+    padding: 0 15px;
+    font-size: 0.9rem;
+ }
+
+ .social-login {
+     display: flex;
+     justify-content: space-between;
+     gap: 15px;
+ }
+
+ .social-btn {
+     flex-grow: 1;
+     padding: 12px;
+     text-align: center;
+     color: #fff;
+     font-weight: bold;
+     text-decoration: none;
+     transition: opacity 0.3s ease;
+ }
+
+ .social-btn:hover {
+     opacity: 0.9;
+ }
+
+ .social-btn.facebook {
+     background-color: #3b5998;
+ }
+
+ .social-btn.google {
+     background-color: #db4437;
+ }
+
+ .social-btn.twitter {
+     background-color: #1da1f2;
+ }
+
+ /* --- PRODUCT DETAIL MAIN SECTION STYLES --- */
+ 
+ /* --- PRODUCT TABS SECTION STYLES (Matching eeee.png) --- */
+/* --- GLOBAL STYLES & RESETS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0c0c0c;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* --- HEADER STYLES --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #111;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.logo { font-size: 22px; font-weight: bold; color: #d1d5db; }
+.icon-nav { display: flex; gap: 30px; }
+.icon-container { position: relative; cursor: pointer; font-size: 18px; color: #d1d5db; }
+.tooltip { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); background-color: #2c2c2c; padding: 5px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; display: none; }
+.icon-container:hover .tooltip { display: block; }
+.user-dropdown { position: relative; }
+.user-menu { display: none; position: absolute; top: 30px; right: -10px; background-color: #2c2c2c; border-radius: 8px; padding: 15px; width: 240px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); z-index: 1001; }
+.user-greeting { font-size: 14px; font-weight: bold; color: #ffffff; margin: 0 0 4px 0; }
+.user-instruction { font-size: 12px; color: #ccc; line-height: 1.4; margin: 0 0 12px 0; }
+.user-login-prompt { font-size: 12px; color: #ccc; margin: 0; }
+.user-menu button { background-color: transparent; border: 1px solid #ccc; color: #fff; padding: 6px 12px; font-size: 13px; border-radius: 4px; cursor: pointer; width: 100%; margin-bottom: 8px; }
+.user-dropdown:hover .user-menu { display: block; }
+
+/* --- HERO SLIDER (AUTOPLAY FORWARD DIRECTION) STYLES --- */
+.css-slider-container {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+    background: #000;
+}
+.slides {
+    display: flex;
+    width: 400%; /* Changed for 4 slides (3 original + 1 clone) */
+    height: 100%;
+    animation: infinite-forward 12s infinite;
+}
+.slide {
+    width: 25%; /* Each slide is 1/4 of the container */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease-in-out;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.slide-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem; width: 90%; max-width: 1200px; text-align: left; }
+.slide-text p { font-size: 1rem; color: #a0a0a0; }
+.slide-text h1 { font-size: 3rem; line-height: 1.2; margin: 10px 0 20px; color: #fff; }
+.slide-text .price { margin-bottom: 30px; }
+.slide-text .current-price { font-size: 1.5rem; font-weight: 600; color: #fff; margin-right: 15px; }
+.slide-text .old-price { font-size: 1.5rem; color: #777; text-decoration: line-through; }
+.slide-image { display: flex; justify-content: center; align-items: center; }
+.slide-image img { max-width: 80%; max-height: 400px; object-fit: contain; }
+
+/* --- GENERAL BUTTON STYLES (Used by Header/Modal) --- */
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #e50914; /* This is the red color */
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #e50914;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Keyframes for the infinite forward sliding */
+@keyframes infinite-forward {
+    0%, 22% { transform: translateX(0%); }
+    25%, 47% { transform: translateX(-25%); }
+    50%, 72% { transform: translateX(-50%); }
+    75%, 97% { transform: translateX(-75%); }
+    100% { transform: translateX(-75%); }
+}
+
+.slider-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #555; }
+
+/* Animate each dot individually over the same total duration */
+@keyframes active-dot-1 {
+    0%, 25% { background-color: #e50914; }
+    28%, 100% { background-color: #555; }
+}
+@keyframes active-dot-2 {
+    0%, 25% { background-color: #555; }
+    28%, 50% { background-color: #e50914; }
+    53%, 100% { background-color: #555; }
+}
+@keyframes active-dot-3 {
+    0%, 50% { background-color: #555; }
+    53%, 75% { background-color: #e50914; }
+    78%, 100% { background-color: #555; }
+}
+
+/* --- TOP PRODUCTS GRID STYLES (from index.html) --- */
+.products-section-grid {
+    padding: 60px 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.product-card-grid-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-grid-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.product-card-grid {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-card-grid img {
+    margin: 0 auto 15px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.rating {
+    color: #e50914;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.product-card-grid h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 15px;
+    min-height: 30px;
+}
+
+.price-grid {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.price-grid del {
+    font-weight: 400;
+    color: #a0a0a0;
+    margin-left: 10px;
+}
+
+.browse-all {
+    background-color: #1a1a1a;
+    border: 1px dashed #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.browse-all:hover {
+    border-color: #e50914;
+}
+
+.browse-all a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease;
+}
+
+.browse-all a:hover {
+    color: #e50914;
+}
+
+/* --- OUR ADVANTAGES SECTION STYLES --- */
+.our-advantages-section {
+    padding: 80px 0;
+    background-color: #141414;
+}
+
+.advantages-grid-new {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.advantage-item-new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.advantage-item-new i {
+    font-size: 2rem;
+    color: #e50914;
+    flex-shrink: 0;
+}
+
+.advantage-text h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+.advantage-text p {
+    font-size: 0.85rem;
+    color: #888;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- MODAL STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #888;
+    font-size: 2rem;
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.modal-subtitle {
+    color: #a0a0a0;
+    margin-bottom: 30px;
+}
+.modal-subtitle a {
+    color: #a0a0a0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.modal-form .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-form input {
+    width: 100%;
+    padding: 14px 12px;
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.modal-form input:focus {
+    border-color: #e50914;
+}
+
+.modal-form input::placeholder {
+    color: #888;
+}
+
+.modal-form button {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 1.1rem;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin: 25px 0;
+}
+
+.separator hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #444;
+}
+
+.separator span {
+    padding: 0 15px;
+    font-size: 0.9rem;
+}
+
+.social-login {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.social-btn {
+    flex-grow: 1;
+    padding: 12px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.social-btn:hover {
+    opacity: 0.9;
+}
+
+.social-btn.facebook {
+    background-color: #3b5998;
+}
+
+.social-btn.google {
+    background-color: #db4437;
+}
+
+.social-btn.twitter {
+    background-color: #1da1f2;
+}
+
+/* --- PRODUCT DETAIL MAIN SECTION STYLES --- */
+/* --- GLOBAL STYLES & RESETS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0c0c0c;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* --- HEADER STYLES --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #111;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.logo { font-size: 22px; font-weight: bold; color: #d1d5db; }
+.icon-nav { display: flex; gap: 30px; }
+.icon-container { position: relative; cursor: pointer; font-size: 18px; color: #d1d5db; }
+.tooltip { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); background-color: #2c2c2c; padding: 5px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; display: none; }
+.icon-container:hover .tooltip { display: block; }
+.user-dropdown { position: relative; }
+.user-menu { display: none; position: absolute; top: 30px; right: -10px; background-color: #2c2c2c; border-radius: 8px; padding: 15px; width: 240px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); z-index: 1001; }
+.user-greeting { font-size: 14px; font-weight: bold; color: #ffffff; margin: 0 0 4px 0; }
+.user-instruction { font-size: 12px; color: #ccc; line-height: 1.4; margin: 0 0 12px 0; }
+.user-login-prompt { font-size: 12px; color: #ccc; margin: 0; }
+.user-menu button { background-color: transparent; border: 1px solid #ccc; color: #fff; padding: 6px 12px; font-size: 13px; border-radius: 4px; cursor: pointer; width: 100%; margin-bottom: 8px; }
+.user-dropdown:hover .user-menu { display: block; }
+
+/* --- HERO SLIDER (AUTOPLAY FORWARD DIRECTION) STYLES --- */
+.css-slider-container {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+    background: #000;
+}
+.slides {
+    display: flex;
+    width: 400%; /* Changed for 4 slides (3 original + 1 clone) */
+    height: 100%;
+    animation: infinite-forward 12s infinite;
+}
+.slide {
+    width: 25%; /* Each slide is 1/4 of the container */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease-in-out;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.slide-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem; width: 90%; max-width: 1200px; text-align: left; }
+.slide-text p { font-size: 1rem; color: #a0a0a0; }
+.slide-text h1 { font-size: 3rem; line-height: 1.2; margin: 10px 0 20px; color: #fff; }
+.slide-text .price { margin-bottom: 30px; }
+.slide-text .current-price { font-size: 1.5rem; font-weight: 600; color: #fff; margin-right: 15px; }
+.slide-text .old-price { font-size: 1.5rem; color: #777; text-decoration: line-through; }
+.slide-image { display: flex; justify-content: center; align-items: center; }
+.slide-image img { max-width: 80%; max-height: 400px; object-fit: contain; }
+
+/* --- GENERAL BUTTON STYLES (Used by Header/Modal) --- */
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #e50914; /* This is the red color */
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #e50914;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Keyframes for the infinite forward sliding */
+@keyframes infinite-forward {
+    0%, 22% { transform: translateX(0%); }
+    25%, 47% { transform: translateX(-25%); }
+    50%, 72% { transform: translateX(-50%); }
+    75%, 97% { transform: translateX(-75%); }
+    100% { transform: translateX(-75%); }
+}
+
+.slider-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #555; }
+
+/* Animate each dot individually over the same total duration */
+@keyframes active-dot-1 {
+    0%, 25% { background-color: #e50914; }
+    28%, 100% { background-color: #555; }
+}
+@keyframes active-dot-2 {
+    0%, 25% { background-color: #555; }
+    28%, 50% { background-color: #e50914; }
+    53%, 100% { background-color: #555; }
+}
+@keyframes active-dot-3 {
+    0%, 50% { background-color: #555; }
+    53%, 75% { background-color: #e50914; }
+    78%, 100% { background-color: #555; }
+}
+
+/* --- TOP PRODUCTS GRID STYLES (from index.html) --- */
+.products-section-grid {
+    padding: 60px 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.product-card-grid-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-grid-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.product-card-grid {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-card-grid img {
+    margin: 0 auto 15px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.rating {
+    color: #e50914;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.product-card-grid h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 15px;
+    min-height: 30px;
+}
+
+.price-grid {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.price-grid del {
+    font-weight: 400;
+    color: #a0a0a0;
+    margin-left: 10px;
+}
+
+.browse-all {
+    background-color: #1a1a1a;
+    border: 1px dashed #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.browse-all:hover {
+    border-color: #e50914;
+}
+
+.browse-all a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease;
+}
+
+.browse-all a:hover {
+    color: #e50914;
+}
+
+/* --- OUR ADVANTAGES SECTION STYLES --- */
+.our-advantages-section {
+    padding: 80px 0;
+    background-color: #141414;
+}
+
+.advantages-grid-new {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.advantage-item-new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.advantage-item-new i {
+    font-size: 2rem;
+    color: #e50914;
+    flex-shrink: 0;
+}
+
+.advantage-text h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+.advantage-text p {
+    font-size: 0.85rem;
+    color: #888;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- FOOTER STYLES (REMOVED - THIS SECTION IS EMPTY NOW) --- */
+/* .main-footer {
+    padding: 60px 0 0 0;
+    background-color: #000;
+    border-top: 1px solid #333;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column .logo-footer {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.footer-column p {
+    color: #a0a0a0;
+    margin-bottom: 20px;
+    max-width: 300px;
+}
+
+.subscribe-form input {
+    width: 100%;
+    padding: 12px;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.subscribe-form button {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.footer-column h4 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #a0a0a0;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    border-top: 1px solid #333333;
+    color: #a0a0a0;
+}
+
+.social-icons a {
+    margin-left: 20px;
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #e50914;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: #e50914;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background-color: #c00a12;
+} */
+
+
+/* --- MODAL STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #888;
+    font-size: 2rem;
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.modal-subtitle {
+    color: #a0a0a0;
+    margin-bottom: 30px;
+}
+.modal-subtitle a {
+    color: #a0a0a0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.modal-form .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-form input {
+    width: 100%;
+    padding: 14px 12px;
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.modal-form input:focus {
+    border-color: #e50914;
+}
+
+.modal-form input::placeholder {
+    color: #888;
+}
+
+.modal-form button {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 1.1rem;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #888;
+    margin: 25px 0;
+}
+
+.separator hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #444;
+}
+
+.separator span {
+    padding: 0 15px;
+    font-size: 0.9rem;
+ }
+
+ .social-login {
+     display: flex;
+     justify-content: space-between;
+     gap: 15px;
+ }
+
+ .social-btn {
+     flex-grow: 1;
+     padding: 12px;
+     text-align: center;
+     color: #fff;
+     font-weight: bold;
+     text-decoration: none;
+     transition: opacity 0.3s ease;
+ }
+
+ .social-btn:hover {
+     opacity: 0.9;
+ }
+
+ .social-btn.facebook {
+     background-color: #3b5998;
+ }
+
+ .social-btn.google {
+     background-color: #db4437;
+ }
+
+ .social-btn.twitter {
+     background-color: #1da1f2;
+ }
+
+ /* --- PRODUCT DETAIL MAIN SECTION STYLES --- */
+/* --- PRODUCT DETAIL MAIN SECTION STYLES --- */
+.product-main-section {
+    padding: 60px 0;
+    background-color: #0c0c0c;
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 80px); /* Adjusted min-height: 100vh minus header height */
+}
+
+.product-main-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 40px;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.product-gallery-area {
+    display: flex;
+    gap: 15px;
+    flex-shrink: 0;
+    width: 530px;
+    height: 440px;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+
+.thumbnail-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.thumb-link {
+    display: block;
+    width: 70px;
+    height: 70px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+    background-color: #0c0c0c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumb-link:hover {
+    border-color: #e50914;
+}
+
+.thumb-link img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.main-image-display {
+    position: relative;
+    flex-grow: 1;
+    width: calc(100% - 70px - 15px);
+    height: 100%;
+    background-color: #0c0c0c; /* Ensure solid background to prevent transparency issues */
+    border-radius: 8px;
+    overflow: hidden; /* Crucial to clip any overflow from absolute positioning */
+    display: flex; /* Keep for general layout but absolute positioning overrides it for children */
+    justify-content: center;
+    align-items: center;
+}
+
+.main-image-display img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    opacity: 0; /* Hidden by default */
+    z-index: 1; /* Default z-index */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Default state: show the first image */
+.main-image-display img:first-child {
+    opacity: 1;
+    z-index: 2; /* Ensure the first image is above others by default */
+}
+
+/* CSS-only Image Switcher using :target */
+#main-jbl660nc-1:target,
+#main-jbl660nc-2:target,
+#main-jbl660nc-3:target,
+#main-jbl660nc-4:target {
+    opacity: 1;
+    z-index: 3; /* Bring the targeted image to the very front */
+}
+
+/* IMPORTANT: Hide all other images when one is targeted.
+   This rule makes sure only the :target element is visible. */
+.main-image-display:not(:has(img:target)) img:first-child, /* if no image is targeted, show first */
+.main-image-display img:target, /* show the targeted image */
+.main-image-display img:not(:target) { /* hide all non-targeted images */
+    opacity: 0; /* Default opacity for all */
+    z-index: 1; /* Default z-index for all */
+}
+.main-image-display img:first-child:not(:target) {
+    opacity: 0;
+}
+.main-image-display img:first-child { /* This rule needs to apply only when no other target is active */
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Corrected and simplified :target logic for image display: */
+.main-image-display img {
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+.main-image-display img:first-child { /* Show first image by default */
+    opacity: 1;
+    z-index: 2;
+}
+.main-image-display img:target { /* Show targeted image */
+    opacity: 1;
+    z-index: 3;
+}
+.main-image-display img:target ~ img:first-child { /* Hide first image if another is targeted after it in source order */
+    opacity: 0;
+    z-index: 1;
+}
+.main-image-display img:first-child:target ~ img:not(:target) { /* Hide subsequent images if first is targeted */
+    opacity: 0;
+    z-index: 1;
+}
+
+
+/* --- (rest of your styles follow here) --- */
+/* (This should be placed in your existing style.css file) */
+
+ .product-info-area {
+     flex-grow: 1;
+     min-width: 480px;
+     padding-top: 5px;
+ }
+
+ .product-brand-name {
+     font-size: 1rem;
+     color: #d1d5db;
+     margin-bottom: 5px;
+ }
+
+ .product-title {
+     font-size: 1.6rem;
+     font-weight: 500;
+     color: #ffffff;
+     margin-bottom: 12px;
+     line-height: 1.3;
+ }
+
+ .product-rating-line {
+     display: flex;
+     align-items: center;
+     margin-bottom: 25px;
+ }
+
+ .product-rating-line .stars {
+     color: #e50914;
+     font-size: 0.85rem;
+     margin-right: 6px;
+ }
+
+ .product-rating-line .rating-count {
+     font-size: 0.85rem;
+     color: #a0a0a0;
+ }
+
+ .price-stock-row {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-bottom: 5px;
+ }
+
+ .price-group {
+     display: flex;
+     align-items: baseline;
+     gap: 15px;
+ }
+
+ .current-price {
+     font-size: 2rem;
+     font-weight: 600;
+     color: #ffffff;
+ }
+
+ .old-price {
+     font-size: 1.2rem;
+     color: #888;
+     text-decoration: line-through;
+     font-weight: 400;
+ }
+
+ .stock-status {
+     display: inline-flex;
+     align-items: center;
+     background-color: #28a745;
+     color: #ffffff;
+     padding: 6px 12px;
+     border-radius: 4px;
+     font-size: 0.85rem;
+     font-weight: 500;
+ }
+
+ .stock-status i {
+     margin-right: 6px;
+     font-size: 0.9rem;
+ }
+
+ .savings-info {
+     font-size: 0.9rem;
+     color: #28a745;
+     margin-bottom: 5px;
+ }
+ .tax-info {
+     font-size: 0.9rem;
+     color: #a0a0a0;
+     margin-bottom: 40px;
+ }
+
+ .offers-heading {
+     font-size: 1.1rem;
+     font-weight: 500;
+     color: #ffffff;
+     margin-bottom: 15px;
+ }
+
+ .offers-grid {
+     display: flex;
+     gap: 10px;
+     flex-wrap: wrap;
+     margin-bottom: 40px;
+ }
+
+ .offer-card {
+     background-color: #1a1a1a;
+     border: 1px solid #333;
+     border-radius: 4px;
+     padding: 10px 15px;
+     font-size: 0.85rem;
+     color: #a0a0a0;
+     flex: 1;
+     min-width: 180px;
+     text-align: center;
+ }
+
+ .add-to-cart-button {
+     background-color: #e50914;
+     color: #fff;
+     border: none;
+     padding: 12px 25px;
+     font-size: 1.1rem;
+     font-weight: 600;
+     border-radius: 5px;
+     cursor: pointer;
+     width: 200px;
+     display: block;
+     text-align: center;
+     transition: background-color 0.3s ease;
+ }
+
+ .add-to-cart-button:hover {
+     background-color: #c00a12;
+ }
+
+ /* --- PRODUCT TABS SECTION STYLES --- */
+ .product-tabs-section {
+     background-color: #0c0c0c;
+     padding: 30px 0 60px 0;
+ }
+
+ .tabs-navigation {
+     display: flex;
+     justify-content: flex-start;
+     border-bottom: 1px solid #333;
+     margin: 0 40px 25px 40px;
+     max-width: 1200px;
+     margin-left: auto;
+     margin-right: auto;
+     padding-left: 0;
+ }
+
+ .tab-item {
+     padding: 10px 20px;
+     color: #a0a0a0;
+     font-size: 1.1rem;
+     font-weight: 500;
+     text-decoration: none;
+     transition: color 0.2s ease, border-bottom 0.2s ease;
+     border-bottom: 3px solid transparent;
+     margin-right: 35px;
+     white-space: nowrap;
+ }
+
+ .tab-item:hover {
+     color: #ffffff;
+ }
+
+ .tab-item.active-tab,
+ #specifications-panel:target ~ .tabs-navigation .tab-item[href="#specifications-panel"],
+ #overview-panel:target ~ .tabs-navigation .tab-item[href="#overview-panel"],
+ #reviews-panel:target ~ .tabs-navigation .tab-item[href="#reviews-panel"] {
+     color: #e50914;
+     border-bottom: 3px solid #e50914;
+ }
+
+ .tab-content-container > div:target ~ .tabs-navigation .tab-item {
+     color: #a0a0a0;
+     border-bottom: 3px solid transparent;
+ }
+ #specifications-panel:target ~ .tabs-navigation .tab-item[href="#specifications-panel"],
+ #overview-panel:target ~ .tabs-navigation .tab-item[href="#overview-panel"],
+ #reviews-panel:target ~ .tabs-navigation .tab-item[href="#reviews-panel"] {
+     color: #e50914;
+     border-bottom: 3px solid #e50914;
+ }
+
+ .tabs-navigation .tab-item.active-tab {
+     color: #e50914;
+     border-bottom: 3px solid #e50914;
+ }
+ .tab-content-container > div:target ~ .tabs-navigation .tab-item.active-tab {
+     color: #a0a0a0;
+     border-bottom: 3px solid transparent;
+ }
+
+
+ .tab-content-container {
+     position: relative;
+     min-height: 250px;
+     padding: 0 40px;
+     max-width: 1200px;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+ .tab-panel {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     opacity: 0;
+     pointer-events: none;
+     transition: opacity 0.3s ease;
+     padding-top: 0px;
+ }
+
+ .tab-panel:target {
+     opacity: 1;
+     pointer-events: auto;
+     position: static;
+ }
+
+ .tab-content-container > div:first-child:not(:target) {
+     opacity: 1;
+     pointer-events: auto;
+     position: static;
+ }
+
+ /* Specifications Details Grid Styling */
+ .specs-details-grid {
+     display: grid;
+     grid-template-columns: 140px 1fr;
+     gap: 15px 30px;
+     max-width: 500px;
+     color: #ffffff;
+     font-size: 1rem;
+     line-height: 1.5;
+ }
+
+ .spec-row {
+     display: contents;
+ }
+
+ .spec-label {
+     color: #a0a0a0;
+     font-weight: 400;
+ }
+
+ .spec-value {
+     color: #ffffff;
+     font-weight: 500;
+ }
+
+
+ /* --- RESPONSIVE ADJUSTMENTS --- */
+ /* For tablets (992px max-width) */
+ @media (max-width: 992px) {
+     /* General sections from index.html */
+     .advantages-grid-new {
+         grid-template-columns: repeat(2, 1fr);
+         gap: 30px;
+     }
+     .advantage-item-new {
+         justify-content: flex-start;
+     }
+     /* Removed footer grid responsive */
+
+     /* Product Detail Section Responsive */
+     .product-main-section {
+         padding: 40px 20px;
+     }
+     .product-main-wrapper {
+         flex-direction: column;
+         align-items: center;
+         gap: 30px;
+         margin: 0 20px;
+     }
+     .product-gallery-area {
+         width: 100%;
+         max-width: 500px;
+         height: auto;
+         flex-direction: column;
+         align-items: center;
+         padding-top: 0;
+     }
+     .main-image-display {
+         width: 100%;
+         height: 350px;
+     }
+     .thumbnail-strip {
+         flex-direction: row;
+         justify-content: center;
+         width: 100%;
+         margin-bottom: 20px;
+     }
+     .product-info-area {
+         text-align: center;
+         min-width: unset;
+         width: 90%;
+     }
+     .product-rating-line {
+         justify-content: center;
+     }
+     .price-stock-row {
+         flex-direction: column;
+         align-items: center;
+         gap: 10px;
+     }
+     .price-group {
+         justify-content: center;
+     }
+     .stock-status {
+         margin-left: 0;
+         width: fit-content;
+     }
+     .offers-grid {
+         justify-content: center;
+     }
+     .add-to-cart-button {
+         width: 80%;
+         max-width: 250px;
+         margin: 0 auto;
+     }
+
+     /* Tabs Responsive */
+     .product-tabs-section {
+         padding-bottom: 40px;
+     }
+     .tabs-navigation {
+         flex-wrap: wrap;
+         justify-content: center;
+         margin: 0 20px 30px 20px;
+     }
+     .tab-item {
+         margin: 0 10px 10px 10px;
+     }
+     .tab-content-container {
+         padding: 0 20px;
+         min-height: 200px;
+     }
+     .specs-details-grid {
+         grid-template-columns: 1fr;
+         max-width: 100%;
+         text-align: center;
+         gap: 10px;
+     }
+     .spec-label {
+         font-weight: 600;
+     }
+ }
+
+ /* For mobile phones (768px max-width) - Global adjustments only */
+ @media (max-width: 768px) {
+     /* Removed footer grid responsive */
+ }
+
+ /* For very small mobile phones (600px max-width) */
+ @media (max-width: 600px) {
+     .product-main-section {
+         padding: 20px 15px;
+     }
+     .product-main-wrapper {
+         margin: 0 15px;
+     }
+     .product-title {
+         font-size: 1.4rem;
+     }
+     .current-price {
+         font-size: 1.8rem;
+     }
+     .old-price {
+         font-size: 1.1rem;
+     }
+     .main-image-display {
+         height: 250px;
+     }
+     .thumbnail-strip {
+         gap: 8px;
+     }
+     .thumb-link {
+         width: 55px;
+         height: 55px;
+     }
+     .offer-card {
+         min-width: unset;
+         width: 100%;
+     }
+     .add-to-cart-button {
+         width: 100%;
+     }
+
+     /* Tabs Responsive */
+     .tabs-navigation {
+         margin: 0 15px 20px 15px;
+     }
+     .tab-item {
+         font-size: 1rem;
+         padding: 8px 15px;
+     }
+     .tab-content-container {
+         padding: 0 15px;
+     }
+ }
